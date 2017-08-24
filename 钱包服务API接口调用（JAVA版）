@@ -1,0 +1,128 @@
+package com.yzcm.walletinter.web.action;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yzcm.walletinter.web.entity.Result;
+import com.yzcm.walletinter.web.service.InterService;
+
+
+/**
+ * @author 彭朝方
+ * 访问url http://47.94.58.25:8080/MvsInter/inter/***.do
+ * */
+@Controller
+@RequestMapping("/inter/")
+public class InterAction {
+	
+	@Resource
+	private InterService service;
+	/**生成一个新账户
+	 *  getNewAccount.do
+	 * @param accountname 账户名，accountpass 账户密码
+	 * @return json
+	 * state为访问状态6为成功，4为失败
+	 * message为请求返回信息
+	 * obj为请求返回的数据封装
+	 * */
+	@RequestMapping("getNewAccount")
+	@ResponseBody
+	Result getNewAccount(String accountname,String accountpass){
+		return service.getNewAccount(accountname, accountpass);
+	}
+	/**查询个人账户的etp余额和cmc余额
+	 * getEtpCmc.do
+	 * @param accountname 账户名，accountpass 账户密码
+	 * @return json
+	 * state为访问状态6为成功，4为失败
+	 * message为请求返回信息
+	 * obj为请求返回的数据封装
+	 * */
+	@RequestMapping("getEtpCmc")
+	@ResponseBody
+	Result getEtpCmc(String accountname,String accountpass){
+		return service.getEtpCmc(accountname, accountpass);
+	}
+	/**生成一个地址
+	 * getNewAddress.do
+	 * @param accountname 账户名，accountpass 账户密码
+	 * @return json
+	 * state为访问状态6为成功，4为失败
+	 * message为请求返回信息
+	 * obj为请求返回的数据封装
+	 * */
+	@RequestMapping("getNewAddress")
+	@ResponseBody
+	Result getNewAddress(String accountname,String accountpass){
+		return service.getNewAddress(accountname, accountpass);
+	}
+	/**修改账户密码
+	 * updatePass.do
+	 * @param accountname 账户名，accountpass 账户密码，accountnewpass 新密码
+	 * @return json
+	 * state为访问状态6为成功，4为失败
+	 * message为请求返回信息
+	 * obj为请求返回的数据封装
+	 * */
+	@RequestMapping("updatePass")
+	@ResponseBody
+	Result updatePass(String accountname,String accountpass,String accountnewpass){
+		return service.updatePass(accountname, accountpass, accountnewpass);
+	}
+	/**查看该账户上的所有地址
+	 * getListAddress.do
+	 * @param accountname 账户名，accountpass 账户密码
+	 * @return json
+	 * state为访问状态6为成功，4为失败
+	 * message为请求返回信息
+	 * obj为请求返回的数据封装
+	 * */
+	@RequestMapping("getListAddress")
+	@ResponseBody
+	Result getListAddress(String accountname,String accountpass){
+		return service.getListAddress(accountname, accountpass);
+	}
+	/**获取账户上的所有交易记录     
+	 * listTxs.do
+	 * @param accountname 账户名，accountpass 账户密码
+	 * @return json
+	 * state为访问状态6为成功，4为失败
+	 * message为请求返回信息
+	 * obj为请求返回的数据封装
+	 * */
+	@RequestMapping("listTxs")
+	@ResponseBody
+	Result listTxs(String accountname,String accountpass){
+		return service.listTxs(accountname, accountpass);
+	}
+	/**发送CMC资产    
+	 * sendAsset.do
+	 * @param accountname 账户名，accountpass 账户密码，number 数量小数点后保留4位，toaddress 接收地址
+	 * @return json
+	 * state为访问状态6为成功，4为失败
+	 * message为请求返回信息
+	 * obj为请求返回的数据封装
+	 * */
+	@RequestMapping("sendAsset")
+	@ResponseBody
+	Result sendAsset(String accountname,String accountpass,String number,String toaddress){
+		return service.sendAsset(accountname, accountpass, number, toaddress, "CMC");
+	}
+	/**获取地址上的cmc资产
+	 * getAddressAsset.do
+	 * @param addres 地址
+	 * @return json
+	 * state为访问状态6为成功，4为失败
+	 * message为请求返回信息
+	 * obj为请求返回的数据封装
+	 * */
+	@RequestMapping("getAddressAsset")
+	@ResponseBody
+	Result getAddressAsset(String address){
+		return service.getAddressAsset(address);
+	}
+	
+}
